@@ -1,0 +1,17 @@
+.avatar {
+	width: 55px;
+	height: 55px;
+}
+.code {
+	font-size: 50px;
+}
+.done {
+	margin-left: 10px;
+	color: red;
+	display: none;
+}
+#qrcode {
+	position: absolute;
+	left: 445px;
+	top: 20px;
+}

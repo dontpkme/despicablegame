@@ -1,0 +1,47 @@
+var util = require("./util.js");
+var requestHandlers = require("./requestHandlers.js");
+
+var handler = {
+	"GET": {},
+	"POST": {},
+	"PUT": {},
+	"DELETE": {},
+	"OPTIONS": {}
+};
+
+handler["GET"]["/"] = requestHandlers.index;
+handler["GET"]["/rank"] = requestHandlers.index;
+handler["GET"]["/game"] = requestHandlers.findGameByCode;
+handler["GET"]["/player"] = requestHandlers.findPlayersByCodeAndSeat;
+handler["GET"]["/share"] = requestHandlers.getSharePage;
+handler["GET"].defaultHandler = requestHandlers.returnFile;
+
+handler["POST"]["/game"] = requestHandlers.createGame;
+handler["POST"]["/player"] = requestHandlers.createPlayer;
+handler["POST"].defaultHandler = requestHandlers.returnFile;
+
+handler["PUT"]["/game"] = requestHandlers.updateGame;
+handler["PUT"]["/player"] = requestHandlers.updatePlayer;
+handler["PUT"].defaultHandler = requestHandlers.returnFile;
+
+handler["DELETE"].defaultHandler = requestHandlers.returnFile;
+handler["DELETE"]["/player"] = requestHandlers.removePlayer;
+
+handler["OPTIONS"].defaultHandler = requestHandlers.returnFile;
+handler["OPTIONS"]["/player"] = requestHandlers.removePlayer;
+
+var route = function(method, request, response) {
+	var path = util.getPathname(request);
+	try {
+		if (typeof handler[method][path] === 'function') {
+			handler[method][path](request, response);
+		} else {
+			handler[method].defaultHandler(request, response);
+		}
+	} catch (e) {
+		console.trace(e.stack);
+		util.initTextResponse(response, 'oops! something wrong.', 400);
+	}
+}
+
+exports.route = route;
