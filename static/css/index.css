@@ -11,14 +11,14 @@
 }
 
 /* START: Accommodating for IE */
-.flip-container:hover .back, .flip-container.hover .back {
+.flip-container.hover .back {
 	-webkit-transform: rotateY(0deg);
 	-moz-transform: rotateY(0deg);
 	-o-transform: rotateY(0deg);
 	-ms-transform: rotateY(0deg);
 	transform: rotateY(0deg);
 }
-.flip-container:hover .front, .flip-container.hover .front {
+.flip-container.hover .front {
 	-webkit-transform: rotateY(180deg);
 	-moz-transform: rotateY(180deg);
 	-o-transform: rotateY(180deg);
@@ -27,8 +27,9 @@
 
 /* END: Accommodating for IE */
 .flip-container, .front, .back {
-	width: 80px;
-	height: 120px;
+	width: 160px;
+	height: 240px;
+	border-radius: 10px;
 }
 .flipper {
 	-webkit-transition: 0.6s;
@@ -69,16 +70,22 @@
 .front {
 	-webkit-transform: rotateY(0deg);
 	-ms-transform: rotateY(0deg);
-	background: lightgreen;
 	z-index: 2;
 }
 .back {
-	background: lightblue;
+	background-color: rgb(255, 235, 70);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
 	-webkit-transform: rotateY(-180deg);
 	-moz-transform: rotateY(-180deg);
 	-o-transform: rotateY(-180deg);
 	-ms-transform: rotateY(-180deg);
 	transform: rotateY(-180deg);
+}
+body {
+	background-image:url(/image/bg.jpg);
+	background-size:cover;
 }
 .front .name {
 	font-size: 2em;
@@ -127,46 +134,64 @@
 	padding: 0 20px;
 	font-size: 18px;
 }
-
-/* vertical */
-.vertical.flip-container {
-	position: relative;
+.card {
+	display:inline-block;
+	position: absolute;
+	top:70px;
 }
-.vertical .back {
-	-webkit-transform: rotateX(180deg);
-	-moz-transform: rotateX(180deg);
-	-ms-transform: rotateX(180deg);
-	transform: rotateX(180deg);
+.card.selectedCard {
+	top:30px;
 }
-.vertical.flip-container .flipper {
-	-webkit-transform-origin: 100% 213.5px;
-	-moz-transform-origin: 100% 213.5px;
-	-ms-transform-origin: 100% 213.5px;
-	transform-origin: 100% 213.5px;
+.front, .back {
+	box-shadow: -4px 5px 3px rgba(0,0,0,0.2);
+	box-sizing: border-box;
 }
-
-/*
-.vertical.flip-container:hover .flipper {
-	-webkit-transform: rotateX(-180deg);
-	-moz-transform: rotateX(-180deg);
-	-ms-transform: rotateX(-180deg);
-	transform: rotateX(-180deg);
+.front{
+	background-color:#fff;
 }
-*/
-
-/* START: Accommodating for IE */
-.vertical.flip-container:hover .back, .vertical.flip-container.hover .back {
-	-webkit-transform: rotateX(0deg);
-	-moz-transform: rotateX(0deg);
-	-o-transform: rotateX(0deg);
-	-ms-transform: rotateX(0deg);
-	transform: rotateX(0deg);
+.back{
+	background-image: url(/image/back.gif);
 }
-.vertical.flip-container:hover .front, .vertical.flip-container.hover .front {
-	-webkit-transform: rotateX(180deg);
-	-moz-transform: rotateX(180deg);
-	-o-transform: rotateX(180deg);
-	transform: rotateX(180deg);
+.cardhead {
+	margin-top:2%;
+	padding-left:3%;
+	height:10.5%;
 }
-
-/* END: Accommodating for IE */
+.cardicon {
+	background-color:red;
+	display:inline-block;
+	height:100%;
+	width:15%;
+}
+.cardbody {
+	background-color:#fff;
+	height:75%;
+}
+.cardbody .cardname {
+	background-color:white;
+	font-size:1.2em;
+	width:90%;
+	text-align: center;
+	margin-left:5%;
+	height:11%;
+}
+.cardbody .cardimage {
+	margin-top:3%;
+	height:50%;
+	/*background-color:red;*/
+}
+.cardbody .cardtext {
+	font-size:0.9em;
+	border:1px solid #aaa;
+	height:45%;
+	width:96%;
+	margin-left:2%;
+	margin-top:2%;
+	padding:2%;
+	box-sizing: border-box;
+	text-align: justify;
+	line-height: 1.2em
+}
+.cardhead .cardicon {
+	float:left;
+}

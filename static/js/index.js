@@ -1,31 +1,17 @@
-const PUBLIC_HOST = "13techart.ddns.net:81";
-const PRIVATE_HOST = "192.168.1.118:81";
-const STAR5_SCORE = 100;
-const STAR4_SCORE = 75;
-const STAR3_SCORE = 50;
-const STAR2_SCORE = 25;
-const COOKIE_LIFETIME = 30; // in minute
-const APP_ID = '821211784657861';
+$(document).ready(function() {
+	render();
+	$(".card").click(function(e) {
+		var $target;
+		if($(e.target).hasClass("card"))
+			$target = $(e.target);
+		else
+			$target = $(e.target).parents(".card");
 
-var fbId, fbName;
-var isFbLogin = false;
-var fbName = "";
-var fbAvatar = "";
-var step = "1";
-var playerName = "";
-var playerAvatar = "";
-var code = "";
-var seat = "";
-var id = "";
-var ended = false;
-var myHost = location.host;
-
-var heartbeat = new Date().getTime();
-var socket;
-var redirect = false;
-var backupCode = "";
-
-$(document).ready(function() {});
+		$(".card").removeClass("selectedCard");
+		$target.addClass("selectedCard");
+		render();
+	});
+});
 
 var socketConnect = function() {
 	socket = io.connect();
@@ -87,7 +73,23 @@ var socketConnect = function() {
 }
 
 var render = function() {
+	var ww = $(window).width();
+	var wh = $(window).height();
 
+	var cardNum = $(".card").length;
+	var xCursor = 0;
+	var lastIsSelected = false;
+	$.each($(".card"), function(i, v){
+		var $v = $(v);
+		if(lastIsSelected){
+			xCursor += 125;
+			lastIsSelected = false;
+		}
+		if($v.hasClass("selectedCard"))
+			lastIsSelected = true;
+		xCursor+=50;
+		$(v).animate({"left": xCursor+"px"}, 300);
+	});
 }
 
 $(window).resize(function() {
