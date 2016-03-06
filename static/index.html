@@ -7,103 +7,32 @@
         <link rel="stylesheet" type="text/css" href="/css/index.css" />
         <script src="/js/jquery.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
-        <script src="/js/index.js"></script>
+        <script src="/js/handlebars.js"></script>
     </head>
     <body>
-		<div class="flip-container card">
-            <div class="flipper">
-                <div class="front">
-                    <div class="cardhead">
-                        <div class="cardicon"></div>
-                    </div>
-                    <div class="cardbody">
-                        <div class="cardname">拳擊比賽</div>
-                        <div class="cardimage"></div>
-                        <div class="cardtext">防禦攻擊成功後，連續兩回合讓對手攻擊成功率降低一半</div>
-                    </div>
-                </div>
-                <div class="back"></div>
-            </div>
-        </div>
-
-        <div class="flip-container card">
-            <div class="flipper">
-                <div class="front">
-                    <div class="cardhead">
-                        <div class="cardicon"></div>
-                    </div>
-                    <div class="cardbody">
-                        <div class="cardname">催眠帽</div>
-                        <div class="cardimage"></div>
-                        <div class="cardtext">對手所站的小小兵若非眼睛睜大的，下兩回合行動失敗</div>
-                    </div>
-                </div>
-                <div class="back"></div>
-            </div>
-        </div>
-
-        <div class="flip-container card">
-            <div class="flipper">
-                <div class="front">
-                    <div class="cardhead">
-                        <div class="cardicon"></div>
-                    </div>
-                    <div class="cardbody">
-                        <div class="cardname">SR-6縮小光線</div>
-                        <div class="cardimage"></div>
-                        <div class="cardtext">對手下回合無法攻擊</div>
-                    </div>
-                </div>
-                <div class="back"></div>
-            </div>
-        </div>
-
-        <div class="flip-container card">
-            <div class="flipper">
-                <div class="front">
-                    <div class="cardhead">
-                        <div class="cardicon"></div>
-                    </div>
-                    <div class="cardbody">
-                        <div class="cardname">眼睛沒有全部打開的</div>
-                        <div class="cardimage"></div>
-                        <div class="cardtext">無</div>
-                    </div>
-                </div>
-                <div class="back"></div>
-            </div>
-        </div>
-
-        <div class="flip-container card">
-            <div class="flipper">
-                <div class="front">
-                    <div class="cardhead">
-                        <div class="cardicon"></div>
-                    </div>
-                    <div class="cardbody">
-                        <div class="cardname">石器時代的</div>
-                        <div class="cardimage"></div>
-                        <div class="cardtext">這回合附帶防禦攻擊效果</div>
-                    </div>
-                </div>
-                <div class="back"></div>
-            </div>
-        </div>
-
-        <div class="flip-container card">
-            <div class="flipper">
-                <div class="front">
-                    <div class="cardhead">
-                        <div class="cardicon"></div>
-                    </div>
-                    <div class="cardbody">
-                        <div class="cardname">惡犬凱爾</div>
-                        <div class="cardimage"></div>
-                        <div class="cardtext">防禦攻擊成功後，連續兩回合讓對手攻擊成功率降低一半</div>
-                    </div>
-                </div>
-                <div class="back"></div>
-            </div>
-        </div>
+        <div id="cardRow"></div>
     </body>
 </html>
+
+<script type="text/x-handlebars-template" id="card-template">
+<div class="flip-container card">
+    <div class="flipper">
+        <div class="front">
+            <div class="cardhead">
+                <div class="cardicon {{type}}"></div>
+            </div>
+            <div class="cardbody">
+                <div class="cardname">{{name}}</div>
+                <div class="cardimage" style="background-image: url(/image/{{image}});">
+                    <img src="/image/border.png"/>
+                </div>
+                <div class="cardtext">{{desc}}</div>
+            </div>
+        </div>
+        <div class="back"></div>
+    </div>
+</div>
+</script>
+
+<script src="/js/cards.js"></script>
+<script src="/js/index.js"></script>

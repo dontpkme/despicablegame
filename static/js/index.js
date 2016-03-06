@@ -1,8 +1,11 @@
 $(document).ready(function() {
+	for (var i = 0; i < 6; i++) {
+		$("#cardRow").append(getCardView(Math.floor(Math.random() * cards.length)));
+	}
 	render();
 	$(".card").click(function(e) {
 		var $target;
-		if($(e.target).hasClass("card"))
+		if ($(e.target).hasClass("card"))
 			$target = $(e.target);
 		else
 			$target = $(e.target).parents(".card");
@@ -79,17 +82,26 @@ var render = function() {
 	var cardNum = $(".card").length;
 	var xCursor = 0;
 	var lastIsSelected = false;
-	$.each($(".card"), function(i, v){
+	$.each($(".card"), function(i, v) {
 		var $v = $(v);
-		if(lastIsSelected){
+		if (lastIsSelected) {
 			xCursor += 125;
 			lastIsSelected = false;
 		}
-		if($v.hasClass("selectedCard"))
+		if ($v.hasClass("selectedCard"))
 			lastIsSelected = true;
-		xCursor+=50;
-		$(v).animate({"left": xCursor+"px"}, 300);
+		xCursor += 50;
+		$(v).animate({
+			"left": xCursor + "px"
+		}, 300);
 	});
+}
+
+var getCardView = function(idx) {
+	var source = $("#card-template").html();
+	var template = Handlebars.compile(source);
+	var html = template(cards[idx]);
+	return html;
 }
 
 $(window).resize(function() {
