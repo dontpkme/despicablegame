@@ -4,7 +4,7 @@ var myShieldCard = [];
 var myMoveCard = [];
 
 $(document).ready(function() {
-	doDeal(10);
+	doDeal(5);
 	doSort();
 	doShowCard(function() {
 		$(this).removeClass("hover");

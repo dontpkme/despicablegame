@@ -84,7 +84,7 @@
 	transform: rotateY(-180deg);
 }
 body {
-	background-image: url(/image/bg.jpg);
+	background-image: url(/image/bg.png);
 	background-size: cover;
 }
 .card {
