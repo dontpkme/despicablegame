@@ -15,7 +15,7 @@
 </html>
 
 <script type="text/x-handlebars-template" id="card-template">
-<div class="flip-container card">
+<div class="flip-container card dealing hover">
     <div class="flipper">
         <div class="front">
             <div class="cardhead">
@@ -26,7 +26,7 @@
                 <div class="cardimage" style="background-image: url(/image/{{image}});">
                     <img src="/image/border.png"/>
                 </div>
-                <div class="cardtext">{{desc}}</div>
+                <div class="cardtext">{{{desc}}}</div>
             </div>
         </div>
         <div class="back"></div>

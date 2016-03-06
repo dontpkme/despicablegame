@@ -1,85 +1,85 @@
 var cards = [{
 	type: "attack",
 	name: "格魯火箭",
-	desc: "【遠程】80%機率攻擊成功",
+	desc: "<span class='range'>【遠程】</span>80%命中率",
 	image: "",
 	possibility: 50
 }, {
 	type: "attack",
-	name: "冰凍光線",
-	desc: "【遠程】50%機率攻擊成功，對手下回合行動失敗",
+	name: "冰凍光線槍",
+	desc: "<span class='range'>【遠程】</span>50%命中率，對手下回合行動失敗",
 	image: "freezeray.png",
 	possibility: 50
 }, {
 	type: "attack",
-	name: "火焰槍",
-	desc: "【遠程】75%機率攻擊成功，對手下回合無法防禦",
-	image: "",
+	name: "火焰噴射槍",
+	desc: "<span class='range'>【遠程】</span>75%命中率，對手下回合無法防禦。與冰凍光線對打時判定為勝方",
+	image: "flamethrower.png",
 	possibility: 50
 }, {
 	type: "attack",
 	name: "餅乾機器人",
-	desc: "【遠程】50%機率攻擊成功，可奪對方一張牌",
-	image: "",
+	desc: "<span class='range'>【遠程】</span>50%命中率，可奪對方一張牌",
+	image: "cookierobot.png",
 	possibility: 50
 }, {
 	type: "attack",
 	name: "雷射槍",
-	desc: "【遠程】75%機率攻擊成功，可棄對手一張牌",
+	desc: "<span class='range'>【遠程】</span>75%命中率，可棄對手一張牌",
 	image: "",
 	possibility: 50
 }, {
 	type: "attack",
 	name: "SR-6縮小光線",
-	desc: "【近程】對手下回合無法攻擊",
+	desc: "<span class='range'>【近程】</span>對手下回合無法攻擊",
 	image: "",
 	possibility: 50
 }, {
 	type: "attack",
 	name: "伸縮裝-手",
-	desc: "【近程】可把對手任意移動一步",
-	image: "",
+	desc: "<span class='range'>【近程】</span>可把對手任意移動一步",
+	image: "strechsuithand.png",
 	possibility: 50
 }, {
 	type: "attack",
 	name: "電擊口紅",
-	desc: "【近程】對手下回合無法移動",
-	image: "",
+	desc: "<span class='range'>【近程】</span>對手下回合無法移動",
+	image: "lipsticktaser.png",
 	possibility: 50
 }, {
 	type: "attack",
 	name: "放屁槍",
-	desc: "【近程】可把對手往下拉一步",
-	image: "",
+	desc: "<span class='range'>【近程】</span>可把對手往下拉一步",
+	image: "fartblaster.png",
 	possibility: 50
 }, {
 	type: "attack",
 	name: "催眠帽",
-	desc: "【近程】若對手所站的小小兵不是眼睛睜大的，下兩回合行動失敗",
+	desc: "<span class='range'>【近程】</span>若對手所站的小小兵不是眼睛睜大的，下兩回合行動失敗",
 	image: "",
 	possibility: 50
 }, {
 	type: "attack",
 	name: "岩漿槍",
-	desc: "【近程】可棄對手兩張牌",
-	image: "",
+	desc: "<span class='range'>【近程】</span>可棄對手兩張牌",
+	image: "lavalampgun.png",
 	possibility: 50
 }, {
 	type: "attack",
 	name: "麻醉手錶",
-	desc: "【近程】對手下兩回合50%機率行動失敗",
+	desc: "<span class='range'>【近程】</span>對手下兩回合50%機率行動失敗",
 	image: "",
 	possibility: 50
 }, {
 	type: "attack",
 	name: "果凍槍",
-	desc: "【近程】可多抽一張牌",
+	desc: "<span class='range'>【近程】</span>可多抽一張牌",
 	image: "",
 	possibility: 50
 }, {
 	type: "attack",
 	name: "食人魚發射槍",
-	desc: "【近程】可奪對手一張牌",
+	desc: "<span class='range'>【近程】</span>可奪對手一張牌",
 	image: "",
 	possibility: 50
 }, {
@@ -139,25 +139,25 @@ var cards = [{
 }, {
 	type: "move",
 	name: "單眼的",
-	desc: "無",
+	desc: "無特殊效果",
 	image: "",
 	possibility: 100
 }, {
 	type: "move",
 	name: "雙眼的",
-	desc: "無",
+	desc: "無特殊效果",
 	image: "",
 	possibility: 100
 }, {
 	type: "move",
 	name: "眼睛睜大的",
-	desc: "無",
+	desc: "無特殊效果",
 	image: "",
 	possibility: 100
 }, {
 	type: "move",
 	name: "眼睛半開的",
-	desc: "無",
+	desc: "無特殊效果",
 	image: "",
 	possibility: 100
 }, {

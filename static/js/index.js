@@ -1,18 +1,13 @@
-$(document).ready(function() {
-	for (var i = 0; i < 6; i++) {
-		$("#cardRow").append(getCardView(Math.floor(Math.random() * cards.length)));
-	}
-	render();
-	$(".card").click(function(e) {
-		var $target;
-		if ($(e.target).hasClass("card"))
-			$target = $(e.target);
-		else
-			$target = $(e.target).parents(".card");
+var cardNum = 0;
+var myAttackCard = [];
+var myShieldCard = [];
+var myMoveCard = [];
 
-		$(".card").removeClass("selectedCard");
-		$target.addClass("selectedCard");
-		render();
+$(document).ready(function() {
+	doDeal(10);
+	doSort();
+	doShowCard(function() {
+		$(this).removeClass("hover");
 	});
 });
 
@@ -78,10 +73,77 @@ var socketConnect = function() {
 var render = function() {
 	var ww = $(window).width();
 	var wh = $(window).height();
+}
 
+$(window).resize(function() {
+	render();
+});
+
+var getCardView = function(idx) {
+	var source = $("#card-template").html();
+	var template = Handlebars.compile(source);
+	var html = template(cards[idx]);
+	return html;
+}
+
+var doDeal = function(n) {
+	if(n==undefined)
+		n=1;
+	cardNum += n;
+
+	for(var i=0; i<n; i++) {
+		var idx = Math.floor(Math.random() * cards.length);
+		var card = cards[idx];
+		switch(card.type) {
+			case "attack":
+				myAttackCard.push(card);
+				break;
+			case "shield":
+				myShieldCard.push(card);
+				break;
+			case "move":
+				myMoveCard.push(card);
+				break;
+		}
+		$("#cardRow").append(getCardView(idx));
+	}
+
+	$(".card").unbind("click").click(function(e) {
+		var $target;
+		if ($(e.target).hasClass("card"))
+			$target = $(e.target);
+		else
+			$target = $(e.target).parents(".card");
+
+		$(".card.selectedCard").animate({
+			"top": "70px"
+		}, 100)
+		if($target.hasClass("selectedCard")) {
+			$(".card").removeClass("selectedCard");
+		} else {
+			$(".card").removeClass("selectedCard");
+			$target.addClass("selectedCard").animate({
+				"top": "30px"
+			}, 300);
+		}
+		doShowCard();
+	});
+
+	$(".dealing").animate({
+		"top": "70px"
+	}, 600, function() {
+		$(".dealing").removeClass("dealing");
+	});
+}
+
+var doSort = function() {
+}
+
+var doShowCard = function(cb) {
 	var cardNum = $(".card").length;
 	var xCursor = 0;
 	var lastIsSelected = false;
+	
 	$.each($(".card"), function(i, v) {
 		var $v = $(v);
 		if (lastIsSelected) {
@@ -93,17 +155,13 @@ var render = function() {
 		xCursor += 50;
 		$(v).animate({
 			"left": xCursor + "px"
-		}, 300);
+		}, 300, cb);
 	});
 }
 
-var getCardView = function(idx) {
-	var source = $("#card-template").html();
-	var template = Handlebars.compile(source);
-	var html = template(cards[idx]);
-	return html;
+var doFlip = function(idx) {
+	if(idx==undefined)
+		$(".card").toggleClass("hover");
+	else
+		$(".card:nth-child("+(idx+1)+")").toggleClass("hover");
 }
-
-$(window).resize(function() {
-	render();
-});
