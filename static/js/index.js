@@ -9,6 +9,10 @@ $(document).ready(function() {
 	doShowCard(function() {
 		$(this).removeClass("hover");
 	});
+
+	$(".dice").click(function(){
+		doDice();
+	});
 });
 
 var socketConnect = function() {
@@ -165,3 +169,18 @@ var doFlip = function(idx) {
 	else
 		$(".card:nth-child("+(idx+1)+")").toggleClass("hover");
 }
+
+var doDice = function(){
+	var t = setInterval("doRandomDice()", 10);
+	$(".diceView").fadeIn(function(){
+		clearInterval(t);
+		$(".diceView").animate({"top":"0"},1500, function(){
+			$(".diceView").fadeOut();	
+		})	
+	});
+}
+
+var doRandomDice = function() {
+	var r =Math.floor(Math.random()*100)+1; 
+	$(".diceNumber").text(r);
+};
