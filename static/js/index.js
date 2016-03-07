@@ -1,25 +1,88 @@
-var cardNum = 0;
+var cardNum = 5;
 var myAttackCard = [];
 var myShieldCard = [];
 var myMoveCard = [];
+var cardSpacing = 50;
+var cardDeckW;
+var status = "normal";
+var selection = undefined;
+var round = 0;
 
 $(document).ready(function() {
-	doDeal(5);
-	doSort();
-	doShowCard(function() {
-		$(this).removeClass("hover");
-	});
+	render();
+	cardNum = 0;
+	setTimeout("doDeal();doShowCard(null,false);", 100);
+	setTimeout("doDeal();doShowCard(null,false);", 200);
+	setTimeout("doDeal();doShowCard(null,false);", 300);
+	setTimeout("doDeal();doShowCard(null,false);", 400);
+	setTimeout("doDeal();doShowCard(null,false);", 500);
+	setTimeout("$('.card').removeClass('hover');", 1500);
+	setTimeout("doNewRound();", 2000);
 
 	$(".dice").click(function() {
 		doDice();
 	});
 
 	$("#additionalDeal").click(function() {
-		doDeal();
-		doSort();
-		doShowCard(function() {
-			$(this).removeClass("hover");
-		});
+		if (confirm("進行一次額外抽牌嗎?")) {
+			doDeal();
+			doSort();
+			doShowCard(function() {
+				$(".card").removeClass("hover");
+			});
+		}
+	});
+
+	$("#drop").click(function() {
+		if (status == "normal") {
+			if (confirm("進行一次棄牌嗎?")) {
+				status = "droping";
+				$(".card").addClass("hover");
+				if (selection != undefined) {
+					$(".card.selectedCard").removeClass("selectedCard").animate({
+						"top": "70px"
+					}, 100, function() {
+						doShowCard(null, false);
+					});
+				}
+			}
+		} else if (status == "droping") {
+			status = "normal";
+			$(".card").removeClass("hover");
+		}
+	});
+
+	$("#take").click(function() {
+		if (status == "normal") {
+			if (confirm("進行一次奪牌嗎?")) {
+				status = "taking";
+				$(".card").addClass("hover");
+				if (selection != undefined) {
+					$(".card.selectedCard").removeClass("selectedCard").animate({
+						"top": "70px"
+					}, 100, function() {
+						doShowCard(null, false);
+					});
+				}
+			}
+		} else if (status == "taking") {
+			status = "normal";
+			$(".card").removeClass("hover");
+		}
+	});
+
+	$(".table").click(function() {
+		if (confirm("確定要翻桌重玩?")) {
+			location.reload();
+		}
+	});
+
+	$("#play").click(function() {
+		if (selection == undefined) {
+			alert("請先選一張牌");
+			return;
+		}
+		console.log($(selection).attr("data-idx"));
 	});
 });
 
@@ -85,6 +148,16 @@ var socketConnect = function() {
 var render = function() {
 	var ww = $(window).width();
 	var wh = $(window).height();
+	cardDeckW = ww - 120;
+	cardSpacing = (cardDeckW - 280) / cardNum;
+
+	var arh = wh * 0.08;
+	$(".actionRow").css({
+		"height": arh + "px",
+		"line-height": arh + "px",
+		"text-align": "center",
+		"border-radius": (arh / 2) + "px"
+	});
 }
 
 $(window).resize(function() {
@@ -94,7 +167,9 @@ $(window).resize(function() {
 var getCardView = function(idx) {
 	var source = $("#card-template").html();
 	var template = Handlebars.compile(source);
-	var html = template(cards[idx]);
+	var data = cards[idx];
+	data.idx = idx;
+	var html = template(data);
 	return html;
 }
 
@@ -132,11 +207,13 @@ var doDeal = function(n) {
 		}, 100)
 		if ($target.hasClass("selectedCard")) {
 			$(".card").removeClass("selectedCard");
+			selection = undefined;
 		} else {
 			$(".card").removeClass("selectedCard");
 			$target.addClass("selectedCard").animate({
 				"top": "30px"
 			}, 300);
+			selection = $target;
 		}
 		doShowCard();
 	});
@@ -150,10 +227,14 @@ var doDeal = function(n) {
 
 var doSort = function() {}
 
-var doShowCard = function(cb) {
+var doShowCard = function(cb, reCalCardSpacing) {
 	var cardNum = $(".card").length;
 	var xCursor = 0;
 	var lastIsSelected = false;
+	if (reCalCardSpacing == undefined)
+		reCalCardSpacing = true;
+	if (reCalCardSpacing)
+		cardSpacing = (cardDeckW - 280) / cardNum;
 
 	$.each($(".card"), function(i, v) {
 		var $v = $(v);
@@ -163,11 +244,13 @@ var doShowCard = function(cb) {
 		}
 		if ($v.hasClass("selectedCard"))
 			lastIsSelected = true;
-		xCursor += 50;
+		xCursor += cardSpacing;
 		$(v).animate({
 			"left": xCursor + "px"
-		}, 300, cb);
+		}, 300);
 	});
+	if (cb != undefined)
+		cb();
 }
 
 var doFlip = function(idx) {
@@ -193,3 +276,21 @@ var doRandomDice = function() {
 	var r = Math.floor(Math.random() * 100) + 1;
 	$(".diceNumber").text(r);
 };
+
+var doNewRound = function() {
+	round++;
+	$(".roundNumber").text(round);
+	$(".roundView").fadeIn(function() {
+		$(".roundView").animate({
+			"top": "0"
+		}, 1000, function() {
+			$(".roundView").fadeOut(function() {
+				doDeal();
+				doSort();
+				doShowCard(function() {
+					$(".card").removeClass("hover");
+				});
+			});
+		})
+	});
+}

@@ -39,7 +39,7 @@ var cards = [{
 	name: "SR-6縮小光線",
 	desc: "<span class='range'>【近程】</span>對手下回合無法攻擊",
 	image: "sr6.png",
-	possibility: 60
+	possibility: 80
 }, {
 	type: "attack",
 	name: "伸縮裝－手",
@@ -51,7 +51,7 @@ var cards = [{
 	name: "電擊口紅",
 	desc: "<span class='range'>【近程】</span>對手下回合無法移動",
 	image: "lipsticktaser.png",
-	possibility: 50
+	possibility: 80
 }, {
 	type: "attack",
 	name: "放屁槍",
@@ -75,7 +75,7 @@ var cards = [{
 	name: "麻醉手錶",
 	desc: "<span class='range'>【近程】</span>對手下兩回合50%機率行動失敗",
 	image: "watch.png",
-	possibility: 40
+	possibility: 50
 }, {
 	type: "attack",
 	name: "果凍槍",

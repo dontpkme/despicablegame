@@ -15,10 +15,14 @@
             <div class="diceLabel">骰子擲出</div>
             <div class="diceNumber"></div>
         </div>
+        <div class="roundView">
+            <div class="roundLabel">Round</div>
+            <div class="roundNumber">1</div>
+        </div>
         <div class="actionCol">
             <div class="dice"></div>
             <div class="step1">
-                <div class="actionRow">出牌</div>
+                <div class="actionRow" id="play">出牌</div>
             </div>
             <div class="step2">
                 <div class="actionRow" id="additionalDeal">額外抽牌</div>
@@ -28,11 +32,12 @@
                 <div class="actionRow" id="end">回合結束</div>
             </div>
         </div>
+        <div class="table"></div>
     </body>
 </html>
 
 <script type="text/x-handlebars-template" id="card-template">
-<div class="flip-container card dealing hover">
+<div class="flip-container card dealing hover" data-idx="{{idx}}">
     <div class="flipper">
         <div class="front">
             <div class="cardhead">
