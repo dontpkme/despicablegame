@@ -10,25 +10,15 @@ var handler = {
 };
 
 handler["GET"]["/"] = requestHandlers.index;
-handler["GET"]["/rank"] = requestHandlers.index;
-handler["GET"]["/game"] = requestHandlers.findGameByCode;
-handler["GET"]["/player"] = requestHandlers.findPlayersByCodeAndSeat;
-handler["GET"]["/share"] = requestHandlers.getSharePage;
 handler["GET"].defaultHandler = requestHandlers.returnFile;
 
-handler["POST"]["/game"] = requestHandlers.createGame;
-handler["POST"]["/player"] = requestHandlers.createPlayer;
 handler["POST"].defaultHandler = requestHandlers.returnFile;
 
-handler["PUT"]["/game"] = requestHandlers.updateGame;
-handler["PUT"]["/player"] = requestHandlers.updatePlayer;
 handler["PUT"].defaultHandler = requestHandlers.returnFile;
 
 handler["DELETE"].defaultHandler = requestHandlers.returnFile;
-handler["DELETE"]["/player"] = requestHandlers.removePlayer;
 
 handler["OPTIONS"].defaultHandler = requestHandlers.returnFile;
-handler["OPTIONS"]["/player"] = requestHandlers.removePlayer;
 
 var route = function(method, request, response) {
 	var path = util.getPathname(request);

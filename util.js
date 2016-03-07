@@ -1,7 +1,6 @@
 var url = require('url');
 
 exports.sockets = [];
-exports.kickedPlayers = [];
 
 exports.initTextResponse = function(response, data, statusCode) {
 	if (statusCode === undefined)
@@ -27,6 +26,12 @@ exports.socketsBroadcast = function(channel, message) {
 			message: message
 		});
 	}
+}
+
+exports.socketEmitByIndex = function(index, channel, message) {
+	this.sockets[index].emit(channel, {
+		message: message
+	});
 }
 
 exports.readPostData = function(request, response, onData) {
