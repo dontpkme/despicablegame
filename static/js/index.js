@@ -10,8 +10,16 @@ $(document).ready(function() {
 		$(this).removeClass("hover");
 	});
 
-	$(".dice").click(function(){
+	$(".dice").click(function() {
 		doDice();
+	});
+
+	$("#additionalDeal").click(function() {
+		doDeal();
+		doSort();
+		doShowCard(function() {
+			$(this).removeClass("hover");
+		});
 	});
 });
 
@@ -91,14 +99,14 @@ var getCardView = function(idx) {
 }
 
 var doDeal = function(n) {
-	if(n==undefined)
-		n=1;
+	if (n == undefined)
+		n = 1;
 	cardNum += n;
 
-	for(var i=0; i<n; i++) {
+	for (var i = 0; i < n; i++) {
 		var idx = Math.floor(Math.random() * cards.length);
 		var card = cards[idx];
-		switch(card.type) {
+		switch (card.type) {
 			case "attack":
 				myAttackCard.push(card);
 				break;
@@ -122,7 +130,7 @@ var doDeal = function(n) {
 		$(".card.selectedCard").animate({
 			"top": "70px"
 		}, 100)
-		if($target.hasClass("selectedCard")) {
+		if ($target.hasClass("selectedCard")) {
 			$(".card").removeClass("selectedCard");
 		} else {
 			$(".card").removeClass("selectedCard");
@@ -140,18 +148,17 @@ var doDeal = function(n) {
 	});
 }
 
-var doSort = function() {
-}
+var doSort = function() {}
 
 var doShowCard = function(cb) {
 	var cardNum = $(".card").length;
 	var xCursor = 0;
 	var lastIsSelected = false;
-	
+
 	$.each($(".card"), function(i, v) {
 		var $v = $(v);
 		if (lastIsSelected) {
-			xCursor += 125;
+			xCursor += 120;
 			lastIsSelected = false;
 		}
 		if ($v.hasClass("selectedCard"))
@@ -164,23 +171,25 @@ var doShowCard = function(cb) {
 }
 
 var doFlip = function(idx) {
-	if(idx==undefined)
+	if (idx == undefined)
 		$(".card").toggleClass("hover");
 	else
-		$(".card:nth-child("+(idx+1)+")").toggleClass("hover");
+		$(".card:nth-child(" + (idx + 1) + ")").toggleClass("hover");
 }
 
-var doDice = function(){
+var doDice = function() {
 	var t = setInterval("doRandomDice()", 10);
-	$(".diceView").fadeIn(function(){
+	$(".diceView").fadeIn(function() {
 		clearInterval(t);
-		$(".diceView").animate({"top":"0"},1500, function(){
-			$(".diceView").fadeOut();	
-		})	
+		$(".diceView").animate({
+			"top": "0"
+		}, 1500, function() {
+			$(".diceView").fadeOut();
+		})
 	});
 }
 
 var doRandomDice = function() {
-	var r =Math.floor(Math.random()*100)+1; 
+	var r = Math.floor(Math.random() * 100) + 1;
 	$(".diceNumber").text(r);
 };

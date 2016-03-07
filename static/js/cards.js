@@ -1,45 +1,51 @@
 var cards = [{
 	type: "attack",
-	name: "格魯火箭",
+	name: "格魯飛彈",
 	desc: "<span class='range'>【遠程】</span>80%命中率",
-	image: "",
-	possibility: 50
+	image: "missle.png",
+	possibility: 100
 }, {
 	type: "attack",
 	name: "冰凍光線槍",
 	desc: "<span class='range'>【遠程】</span>50%命中率，對手下回合行動失敗",
 	image: "freezeray.png",
-	possibility: 50
+	possibility: 80
 }, {
 	type: "attack",
 	name: "火焰噴射槍",
-	desc: "<span class='range'>【遠程】</span>75%命中率，對手下回合無法防禦。與冰凍光線對打時判定為勝方",
+	desc: "<span class='range'>【遠程】</span>75%命中率，對手下回合無法防禦",
 	image: "flamethrower.png",
-	possibility: 50
+	possibility: 80
 }, {
 	type: "attack",
 	name: "餅乾機器人",
 	desc: "<span class='range'>【遠程】</span>50%命中率，可奪對方一張牌",
 	image: "cookierobot.png",
-	possibility: 50
+	possibility: 70
 }, {
 	type: "attack",
 	name: "雷射槍",
 	desc: "<span class='range'>【遠程】</span>75%命中率，可棄對手一張牌",
-	image: "",
-	possibility: 50
+	image: "laser.png",
+	possibility: 70
+}, {
+	type: "attack",
+	name: "超大火球槍",
+	desc: "<span class='range'>【近程】</span>此攻擊無法被防禦，可棄對手兩張牌",
+	image: "bigblastergun.png",
+	possibility: 20
 }, {
 	type: "attack",
 	name: "SR-6縮小光線",
 	desc: "<span class='range'>【近程】</span>對手下回合無法攻擊",
-	image: "",
-	possibility: 50
+	image: "sr6.png",
+	possibility: 60
 }, {
 	type: "attack",
-	name: "伸縮裝-手",
+	name: "伸縮裝－手",
 	desc: "<span class='range'>【近程】</span>可把對手任意移動一步",
 	image: "strechsuithand.png",
-	possibility: 50
+	possibility: 40
 }, {
 	type: "attack",
 	name: "電擊口紅",
@@ -51,84 +57,90 @@ var cards = [{
 	name: "放屁槍",
 	desc: "<span class='range'>【近程】</span>可把對手往下拉一步",
 	image: "fartblaster.png",
-	possibility: 50
+	possibility: 40
 }, {
 	type: "attack",
 	name: "催眠帽",
 	desc: "<span class='range'>【近程】</span>若對手所站的小小兵不是眼睛睜大的，下兩回合行動失敗",
-	image: "",
-	possibility: 50
+	image: "hypnohat.png",
+	possibility: 40
 }, {
 	type: "attack",
 	name: "岩漿槍",
 	desc: "<span class='range'>【近程】</span>可棄對手兩張牌",
 	image: "lavalampgun.png",
-	possibility: 50
+	possibility: 40
 }, {
 	type: "attack",
 	name: "麻醉手錶",
 	desc: "<span class='range'>【近程】</span>對手下兩回合50%機率行動失敗",
-	image: "",
-	possibility: 50
+	image: "watch.png",
+	possibility: 40
 }, {
 	type: "attack",
 	name: "果凍槍",
-	desc: "<span class='range'>【近程】</span>可多抽一張牌",
-	image: "",
-	possibility: 50
+	desc: "<span class='range'>【近程】</span>可多抽一張牌。與PX-41對打時判定為勝方",
+	image: "jellygun.png",
+	possibility: 70
 }, {
 	type: "attack",
 	name: "食人魚發射槍",
 	desc: "<span class='range'>【近程】</span>可奪對手一張牌",
-	image: "",
-	possibility: 50
+	image: "fish.png",
+	possibility: 70
 }, {
 	type: "shield",
-	name: "海灘球",
+	name: "雨傘",
 	desc: "防禦攻擊",
-	image: "",
-	possibility: 50
+	image: "umbrella.png",
+	possibility: 100
+}, {
+	type: "shield",
+	name: "石中劍",
+	desc: "防禦攻擊成功後，可奪對方一張牌",
+	image: "excalibur.png",
+	possibility: 70
 }, {
 	type: "shield",
 	name: "全副武裝",
 	desc: "防禦攻擊成功後，反彈攻擊效果",
-	image: "",
+	image: "knight.png",
 	possibility: 50
 }, {
 	type: "shield",
 	name: "變大裝置",
 	desc: "連續兩回合50%防禦攻擊",
 	image: "bigmachine.png",
-	possibility: 50
+	possibility: 70
 }, {
 	type: "shield",
-	name: "伸縮裝-腳",
+	name: "伸縮裝－腳",
 	desc: "80%閃避攻擊",
-	image: "",
-	possibility: 50
+	image: "strechsuitleg.png",
+	possibility: 100
 }, {
 	type: "shield",
 	name: "PX-41",
 	desc: "連續防禦攻擊兩回合，下回合自己25%機率行動失敗",
 	image: "px41.png",
-	possibility: 50
+	possibility: 70
 }, {
 	type: "shield",
 	name: "拳擊比賽",
 	desc: "防禦攻擊成功後，下回合對手75%機率行動失敗",
-	image: "",
-	possibility: 50
+	image: "boxing.png",
+	possibility: 70
 }, {
 	type: "shield",
 	name: "噴射背包",
 	desc: "50%閃避攻擊，若沒被攻擊到可多用一張移動牌",
-	image: "",
+	image: "jetpack.png",
 	possibility: 50
 }, {
 	type: "shield",
 	name: "烏賊發射槍",
 	desc: "50%防禦攻擊，若沒被攻擊到可奪對手一張牌",
-	image: "",
+	image: "squidlauncher.png",
 	possibility: 50
 }, {
 	type: "shield",
@@ -140,156 +152,156 @@ var cards = [{
 	type: "move",
 	name: "單眼的",
 	desc: "無特殊效果",
-	image: "",
+	image: "singleeye.png",
 	possibility: 100
 }, {
 	type: "move",
 	name: "雙眼的",
 	desc: "無特殊效果",
-	image: "",
+	image: "doubleeye.png",
 	possibility: 100
 }, {
 	type: "move",
 	name: "眼睛睜大的",
 	desc: "無特殊效果",
-	image: "",
+	image: "eyeopened.png",
 	possibility: 100
 }, {
 	type: "move",
 	name: "眼睛半開的",
 	desc: "無特殊效果",
-	image: "",
+	image: "eyehalfopened.png",
 	possibility: 100
 }, {
 	type: "move",
 	name: "中分的",
 	desc: "若移動成功，40%機率可再抽一張牌",
-	image: "",
-	possibility: 50
+	image: "sleek.png",
+	possibility: 90
 }, {
 	type: "move",
 	name: "軟髮的",
 	desc: "若移動成功，40%機率可再抽一張牌",
-	image: "",
-	possibility: 50
+	image: "soft.png",
+	possibility: 90
 }, {
 	type: "move",
 	name: "光頭的",
 	desc: "若移動成功，40%機率可再抽一張牌",
-	image: "",
-	possibility: 50
+	image: "bold.png",
+	possibility: 90
 }, {
 	type: "move",
 	name: "高的",
 	desc: "若移動成功，50%機率可再抽一張牌",
-	image: "",
-	possibility: 50
+	image: "tall.png",
+	possibility: 80
 }, {
 	type: "move",
 	name: "矮胖的",
 	desc: "這回合附帶50%防禦攻擊效果",
-	image: "",
-	possibility: 50
+	image: "fat.png",
+	possibility: 80
 }, {
 	type: "move",
 	name: "往上看的",
-	desc: "若移動成功，50%可再抽一張牌",
-	image: "",
-	possibility: 50
+	desc: "若移動成功，50%機率可再抽一張牌",
+	image: "lookup.png",
+	possibility: 80
 }, {
 	type: "move",
 	name: "往下看的",
-	desc: "若移動成功，50%可棄對方一張牌",
-	image: "",
-	possibility: 50
+	desc: "若移動成功，50%機率可棄對方一張牌",
+	image: "lookdown.png",
+	possibility: 80
 }, {
 	type: "move",
 	name: "石器時代的",
 	desc: "這回合附帶防禦攻擊效果",
-	image: "",
-	possibility: 50
+	image: "stoneage.png",
+	possibility: 40
 }, {
 	type: "move",
 	name: "蘿蔔國王",
 	desc: "這回合附帶防禦攻擊效果，並可多使用一張攻擊牌",
 	image: "",
-	possibility: 50
+	possibility: 30
 }, {
 	type: "move",
 	name: "嚕嚕咪",
 	desc: "這回合附帶防禦攻擊效果，並可奪對方一張牌",
-	image: "",
-	possibility: 50
+	image: "moomin.png",
+	possibility: 30
 }, {
 	type: "move",
 	name: "拿食物的",
 	desc: "這回合附帶防禦攻擊效果",
-	image: "",
+	image: "food.png",
 	possibility: 50
 }, {
 	type: "move",
 	name: "拿武器的",
 	desc: "若移動成功，可多用一張攻擊牌",
-	image: "",
+	image: "armed.png",
 	possibility: 50
 }, {
 	type: "move",
 	name: "拿花的",
 	desc: "若移動成功，可多用一張移動牌",
-	image: "",
+	image: "rose.png",
 	possibility: 50
 }, {
 	type: "move",
 	name: "拿禮物的",
 	desc: "若移動成功，可再抽一張牌",
-	image: "",
+	image: "gift.png",
 	possibility: 50
 }, {
 	type: "move",
 	name: "海盜的",
 	desc: "若移動成功，可奪對方一張牌",
-	image: "",
-	possibility: 50
+	image: "pirate.png",
+	possibility: 40
 }, {
 	type: "move",
 	name: "拿破崙的",
 	desc: "若移動成功，可奪對方一張牌",
-	image: "",
-	possibility: 50
+	image: "napeleon.png",
+	possibility: 40
 }, {
 	type: "move",
 	name: "特務的",
 	desc: "若移動成功，可棄對手一張牌",
-	image: "",
-	possibility: 50
+	image: "agent.png",
+	possibility: 40
 }, {
 	type: "move",
 	name: "戴嚕嚕咪帽的",
-	desc: "若移動成功，可再抽一張牌",
+	desc: "若移動成功，可再抽兩張牌",
 	image: "",
-	possibility: 50
+	possibility: 30
 }, {
 	type: "move",
 	name: "戴帽子的",
 	desc: "若移動成功，可再抽一張牌",
-	image: "",
-	possibility: 50
+	image: "hat.png",
+	possibility: 40
 }, {
 	type: "move",
 	name: "史都華",
 	desc: "若移動成功，可棄對方兩張牌",
-	image: "",
-	possibility: 50
+	image: "stuart.png",
+	possibility: 30
 }, {
 	type: "move",
 	name: "凱文",
 	desc: "若移動成功，可任意多移動一步不需消耗移動牌",
 	image: "",
-	possibility: 50
+	possibility: 30
 }, {
 	type: "move",
 	name: "拖曳飛行",
 	desc: "在落後時才可使用，若移動成功, 可任意移動兩步",
-	image: "",
-	possibility: 50
+	image: "fly.png",
+	possibility: 40
 }];
