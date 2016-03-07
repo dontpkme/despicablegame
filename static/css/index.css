@@ -134,11 +134,11 @@ body {
 	background-image: url(/image/move.png);
 }
 .cardbody {
-	background-color: #fff;
 	height: 75%;
+	position: relative;
+	top: -5%;
 }
 .cardbody .cardname {
-	background-color: white;
 	font-size: 1.2em;
 	width: 90%;
 	text-align: center;
@@ -163,7 +163,7 @@ body {
 .cardbody .cardtext {
 	font-size: 0.9em;
 	border: 1px solid #aaa;
-	height: 45%;
+	height: 52%;
 	width: 90%;
 	margin-left: 5%;
 	margin-top: 2%;
