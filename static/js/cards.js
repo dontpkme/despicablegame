@@ -108,9 +108,9 @@ var cards = [{
 	possibility: 50
 }, {
 	type: "shield",
-	name: "變大裝置",
-	desc: "赫伯的邪惡機器，讓凱文變得無比巨大，變大之後，攻擊好像不怎麼痛了。連續兩回合50%防禦攻擊。",
-	image: "bigmachine.png",
+	name: "拳擊比賽",
+	desc: "用勾拳或姆指摔角決一勝負。防禦攻擊成功後，下回合對手75%機率行動失敗。",
+	image: "boxing.png",
 	possibility: 70
 }, {
 	type: "shield",
@@ -126,10 +126,16 @@ var cards = [{
 	possibility: 70
 }, {
 	type: "shield",
-	name: "拳擊比賽",
-	desc: "用勾拳或姆指摔角決一勝負。防禦攻擊成功後，下回合對手75%機率行動失敗。",
-	image: "boxing.png",
+	name: "紫色偽裝",
+	desc: "想要看起來更邪惡的東西嗎？塗成紫色吧。連續兩回合50%機率防禦攻擊。",
+	image: "purple.png",
 	possibility: 70
+}, {
+	type: "shield",
+	name: "惡犬凱爾",
+	desc: "不知道是狗或是變種生物，總之會咬人。防禦攻擊成功後，連續兩回合讓對手攻擊成功率降低一半。",
+	image: "kyle.png",
+	possibility: 50
 }, {
 	type: "shield",
 	name: "噴射背包",
@@ -144,10 +150,10 @@ var cards = [{
 	possibility: 50
 }, {
 	type: "shield",
-	name: "惡犬凱爾",
-	desc: "不知道是狗或是變種生物，總之會咬人。防禦攻擊成功後，連續兩回合讓對手攻擊成功率降低一半。",
-	image: "kyle.png",
-	possibility: 50
+	name: "變大裝置",
+	desc: "赫伯的邪惡機器，讓凱文變得無比巨大。50%防禦攻擊，若沒被攻擊到下回合能使用兩張移動牌。",
+	image: "bigmachine.png",
+	possibility: 70
 }, {
 	type: "move",
 	name: "單眼的",

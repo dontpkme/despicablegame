@@ -28,7 +28,7 @@ $(document).ready(function() {
 			doDeal();
 			doSort();
 			doShowCard(function() {
-				$(".card").removeClass("hover");
+				setTimeout('$(".card").removeClass("hover")', 1000);
 			});
 		}
 	});
@@ -288,7 +288,7 @@ var doNewRound = function() {
 				doDeal();
 				doSort();
 				doShowCard(function() {
-					$(".card").removeClass("hover");
+					setTimeout('$(".card").removeClass("hover")', 1000);
 				});
 			});
 		})
