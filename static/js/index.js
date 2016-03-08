@@ -2,7 +2,7 @@ var cardTopNormal = 100;
 var cardTopSelected = 30;
 var cardSpacing = 50;
 var socket;
-var ww,wh;
+var ww, wh;
 
 var cardNum = 5;
 var myAttackCard = [];
@@ -27,7 +27,7 @@ $(document).ready(function() {
 	render();
 	socketConnect();
 
-	$(".pkView").click(function(){
+	$(".pkView").click(function() {
 		$(".pkView").fadeOut();
 		$(".pkRow").empty();
 	});
@@ -41,7 +41,7 @@ $(document).ready(function() {
 	});
 
 	$("#draw").click(function() {
-		if(adNum > 0){
+		if (adNum > 0) {
 			doDeal();
 			doSort();
 			doShowCard(function() {
@@ -49,27 +49,27 @@ $(document).ready(function() {
 			});
 			adNum--;
 		}
-		if(adNum==0) {
+		if (adNum == 0) {
 			$("#draw").fadeOut();
 		}
 	});
 
 	$("#drop").click(function() {
 		socket.emit("drop", {
-			player:player,
-			num:canDropNum
+			player: player,
+			num: canDropNum
 		});
 		$("#drop").fadeOut();
 	});
 
 	$("#dropOk").click(function() {
-		if(dropNum==0) {
+		if (dropNum == 0) {
 			status = "normal";
 			$(".card").removeClass("hover");
 			$(".step3").hide();
-			if(!roundEnd)
+			if (!roundEnd)
 				$(".step2").fadeIn();
-		} else if(dropNum>0){
+		} else if (dropNum > 0) {
 			if (selection == undefined) {
 				alert("請先選一張牌");
 				return;
@@ -78,27 +78,27 @@ $(document).ready(function() {
 			$(selection).removeClass("hover");
 			setTimeout("doDrop();", 1000);
 
-			if(dropNum==0)
+			if (dropNum == 0)
 				$("#dropOk").text("完成棄牌");
 		}
 	});
 
 	$("#take").click(function() {
 		socket.emit("take", {
-			player:player,
-			num:canTakeNum
+			player: player,
+			num: canTakeNum
 		});
 		$("#take").fadeOut();
 	});
 
 	$("#takeOk").click(function() {
-		if(takeNum==0) {
+		if (takeNum == 0) {
 			status = "normal";
 			$(".card").removeClass("hover");
 			$(".step3").hide();
-			if(!roundEnd)
+			if (!roundEnd)
 				$(".step2").fadeIn();
-		} else if(takeNum>0){
+		} else if (takeNum > 0) {
 			if (selection == undefined) {
 				alert("請先選一張牌");
 				return;
@@ -107,7 +107,7 @@ $(document).ready(function() {
 			$(selection).removeClass("hover");
 			setTimeout("doDrop();doTake()", 1000);
 
-			if(takeNum==0)
+			if (takeNum == 0)
 				$("#takeOk").text("完成奪牌");
 		}
 	});
@@ -143,11 +143,11 @@ var reset = function() {
 	status = "normal";
 	selection = undefined;
 	round = 0;
-	dropNum=0;
-	canDropNum=0;
-	takeNum=0;
-	canTakeNum=0;
-	adNum=0;
+	dropNum = 0;
+	canDropNum = 0;
+	takeNum = 0;
+	canTakeNum = 0;
+	adNum = 0;
 
 	render();
 	cardNum = 0;
@@ -178,7 +178,7 @@ var socketConnect = function() {
 	socket.on("system", function(data) {
 		switch (data.message.split("::")[0]) {
 			case "gamewait":
-				if(status != "wait"){
+				if (status != "wait") {
 					$(".waitView").fadeIn();
 				}
 				break;
@@ -193,72 +193,72 @@ var socketConnect = function() {
 			case "pk":
 				var pk1p = data.message.split("::")[1];
 				var pk2p = data.message.split("::")[2];
-				$(".step1").fadeOut(400,function(){
-					if(player=="1p"){
+				$(".step1").fadeOut(400, function() {
+					if (player == "1p") {
 						var action = cards[pk1p].action;
-						if(cards[pk1p].name=="騎士盔甲" && cards[pk2p].type=="attack") {
+						if (cards[pk1p].name == "騎士盔甲" && cards[pk2p].type == "attack") {
 							action = cards[pk2p].action;
-						} else if(cards[pk2p].name=="騎士盔甲" && cards[pk1p].type=="attack") {
+						} else if (cards[pk2p].name == "騎士盔甲" && cards[pk1p].type == "attack") {
 							action = [];
-						} 
+						}
 						$(".p1").html("<span class='me'>我方</span>");
 						$(".p2").html("<span class='enemy'>對方</span>");
-					} else if(player=="2p"){
+					} else if (player == "2p") {
 						var action = cards[pk2p].action;
-						if(cards[pk2p].name=="騎士盔甲" && cards[pk1p].type=="attack") {
+						if (cards[pk2p].name == "騎士盔甲" && cards[pk1p].type == "attack") {
 							action = cards[pk1p].action;
-						} else if(cards[pk1p].name=="騎士盔甲" && cards[pk2p].type=="attack") {
+						} else if (cards[pk1p].name == "騎士盔甲" && cards[pk2p].type == "attack") {
 							action = [];
 						}
 						$(".p1").html("<span class='enemy'>對方</span>");
 						$(".p2").html("<span class='me'>我方</span>");
 					}
 					$("#draw,#additionalPlay,#drop,#take,#dropOk,#takeOk").hide();
-					$.each(action, function(i,v){
-						if(v.draw) {
+					$.each(action, function(i, v) {
+						if (v.draw) {
 							$("#draw").show();
-							adNum=v.draw;
+							adNum = v.draw;
 						}
-						if(v.additionalPlay) {
+						if (v.additionalPlay) {
 							$("#additionalPlay").show();
 						}
-						if(v.drop) {
+						if (v.drop) {
 							$("#drop").show();
 							canDropNum = v.drop;
 						}
-						if(v.take) {
+						if (v.take) {
 							$("#take").show();
 							canTakeNum = v.take;
 						}
 					});
 					$(".step2").fadeIn(400);
 				});
-				$(".pkView").fadeIn(function(){
+				$(".pkView").fadeIn(function() {
 					$(".pkRow").append(getCardView(pk1p));
 					$(".pkRow").append(getCardView(pk2p));
-					
+
 					$(".pkView .card:first-child").css({
-						"left":(ww/2-200)+"px",
-						"top":"-200px",
+						"left": (ww / 2 - 200) + "px",
+						"top": "-200px",
 					}).animate({
-						"top":(cardTopNormal-30)+"px"
+						"top": (cardTopNormal - 30) + "px"
 					}, 200);
 
 					$(".pkView .card:last-child").css({
-						"left":(ww/2+40)+"px",
-						"top":"-200px",
+						"left": (ww / 2 + 40) + "px",
+						"top": "-200px",
 					}).animate({
-						"top":(cardTopNormal-30)+"px"
+						"top": (cardTopNormal - 30) + "px"
 					}, 200);
 
 					$(".pkTitle").css({
-						"top":(cardTopNormal-100)+"px"
+						"top": (cardTopNormal - 100 < 1) ? 1 : cardTopNormal - 100 + "px"
 					})
 					setTimeout('$(".pkView .card").removeClass("hover");', 1000);
 				});
 				break;
 			case "dice":
-				alert("對方擲骰: "+data.message.split("::")[1]);
+				alert("對方擲骰: " + data.message.split("::")[1]);
 				break;
 			case "newround":
 				doNewRound();
@@ -275,11 +275,11 @@ var socketConnect = function() {
 				$("#cardRow .card").addClass("hover");
 				if (selection != undefined) {
 					$(".card.selectedCard").removeClass("selectedCard").animate({
-						"top": cardTopNormal+"px"
+						"top": cardTopNormal + "px"
 					}, 100, function() {
 						doShowCard(null, false);
 					});
-					selection=undefined;
+					selection = undefined;
 				}
 				break;
 			case "take":
@@ -291,11 +291,11 @@ var socketConnect = function() {
 				$("#cardRow .card").addClass("hover");
 				if (selection != undefined) {
 					$(".card.selectedCard").removeClass("selectedCard").animate({
-						"top": cardTopNormal+"px"
+						"top": cardTopNormal + "px"
 					}, 100, function() {
 						doShowCard(null, false);
 					});
-					selection=undefined;
+					selection = undefined;
 				}
 				break;
 			case "get":
@@ -311,11 +311,11 @@ var render = function() {
 	wh = $(window).height();
 	cardDeckW = ww - 120;
 	cardSpacing = (cardDeckW - 280) / cardNum;
-	cardTopNormal = (wh/2)-80;
-	cardTopSelected = cardTopNormal-70;
+	cardTopNormal = (wh / 2) - 80;
+	cardTopSelected = cardTopNormal - 70;
 	$("body,html").css({
-		"width": ww+"px",
-		"height": wh+"px",
+		"width": ww + "px",
+		"height": wh + "px",
 	});
 
 	var arh = wh * 0.08;
@@ -371,7 +371,7 @@ var doDeal = function(n, idx) {
 			$target = $(e.target).parents(".card");
 
 		$(".card.selectedCard").animate({
-			"top": cardTopNormal+"px"
+			"top": cardTopNormal + "px"
 		}, 100)
 		if ($target.hasClass("selectedCard")) {
 			$(".card").removeClass("selectedCard");
@@ -379,7 +379,7 @@ var doDeal = function(n, idx) {
 		} else {
 			$(".card").removeClass("selectedCard");
 			$target.addClass("selectedCard").animate({
-				"top": cardTopSelected+"px"
+				"top": cardTopSelected + "px"
 			}, 300);
 			selection = $target;
 		}
@@ -387,7 +387,7 @@ var doDeal = function(n, idx) {
 	});
 
 	$(".dealing").animate({
-		"top": cardTopNormal+"px"
+		"top": cardTopNormal + "px"
 	}, 600, function() {
 		$(".dealing").removeClass("dealing");
 	});
@@ -407,7 +407,7 @@ var doShowCard = function(cb, reCalCardSpacing) {
 	$.each($("#cardRow .card"), function(i, v) {
 		var $v = $(v);
 		if (lastIsSelected) {
-			xCursor += 170-cardSpacing;
+			xCursor += 170 - cardSpacing;
 			lastIsSelected = false;
 		}
 		if ($v.hasClass("selectedCard"))
@@ -451,8 +451,8 @@ var doRandomDice = function() {
 
 var doNewRound = function() {
 	round++;
-	roundEnd=false;
-	$(".step2,.step3").fadeOut(function(){
+	roundEnd = false;
+	$(".step2,.step3").fadeOut(function() {
 		$(".step1").fadeIn();
 	});
 	$(".roundNumber").text(round);
@@ -472,31 +472,31 @@ var doNewRound = function() {
 }
 
 var doDrop = function() {
-	if(selection!=undefined) {
+	if (selection != undefined) {
 		var $card = $(selection);
 		$card.animate({
-			"top":"-300px"
+			"top": "-300px"
 		}, 300, function() {
 			var data = cards[$card.attr("data-idx")];
-			switch(data.type){
+			switch (data.type) {
 				case "attack":
-					for(var i=0;i<myAttackCard.length;i++){
-						if(myAttackCard[i].idx==data.idx){
-							myAttackCard.splice(i,1);
+					for (var i = 0; i < myAttackCard.length; i++) {
+						if (myAttackCard[i].idx == data.idx) {
+							myAttackCard.splice(i, 1);
 						}
 					}
 					break;
 				case "shield":
-					for(var i=0;i<myShieldCard.length;i++){
-						if(myShieldCard[i].idx==data.idx){
-							myShieldCard.splice(i,1);
+					for (var i = 0; i < myShieldCard.length; i++) {
+						if (myShieldCard[i].idx == data.idx) {
+							myShieldCard.splice(i, 1);
 						}
 					}
 					break;
 				case "move":
-					for(var i=0;i<myMoveCard.length;i++){
-						if(myMoveCard[i].idx==data.idx){
-							myMoveCard.splice(i,1);
+					for (var i = 0; i < myMoveCard.length; i++) {
+						if (myMoveCard[i].idx == data.idx) {
+							myMoveCard.splice(i, 1);
 						}
 					}
 					break;
@@ -511,7 +511,7 @@ var doDrop = function() {
 var doTake = function(idx) {
 	socket.emit("get", {
 		"player": player,
-		"idx":$(selection).attr("data-idx")
+		"idx": $(selection).attr("data-idx")
 	});
 }
 
@@ -520,7 +520,7 @@ var doEnd = function() {
 	socket.emit("end", {
 		"player": player
 	});
-	roundEnd=true;
+	roundEnd = true;
 }
 
 var doGain = function(idx) {
