@@ -209,7 +209,7 @@ body {
 	background-repeat: no-repeat;
 	height: 50px;
 }
-.diceView, .roundView, .waitView, .pkView {
+.diceView, .roundView, .waitView, .pkView, .additionalPlayView {
 	position: fixed;
 	background-color: rgba(0, 0, 0, 0.5);
 	color: #ffffff;
@@ -257,6 +257,10 @@ body {
 }
 .pkTitle {
 	position: relative;
+}
+.apTitle {
+	position: relative;
+	font-size: 2.5em;
 }
 .p1, .p2 {
 	float: left;

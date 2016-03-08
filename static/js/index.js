@@ -19,6 +19,8 @@ var dropNum = 0;
 var canTakeNum = 0;
 var takeNum = 0;
 var adNum = 0;
+var additionalPlayType;
+var additionalPlayNum;
 var roundEnd = false;
 
 $(document).ready(function() {
@@ -30,6 +32,12 @@ $(document).ready(function() {
 	$(".pkView").click(function() {
 		$(".pkView").fadeOut();
 		$(".pkRow").empty();
+	});
+
+	$(".additionalPlayView").click(function() {
+		$(".additionalPlayView").fadeOut(function() {
+			$(".apRow").empty();
+		});
 	});
 
 	$(".dice").click(function() {
@@ -130,11 +138,54 @@ $(document).ready(function() {
 		doDrop();
 		$(".step1").fadeOut();
 	});
+
+	$("#additionalPlay").click(function() {
+		var card = cards[$(selection).attr("data-idx")];
+		if (selection == undefined) {
+			alert("請先選一張牌");
+			return;
+		} else if (card.type != additionalPlayType) {
+			alert("現在只能出" + (additionalPlayType == "attack" ? "攻擊牌" : (additionalPlayType == "shield" ? "防禦牌" : "移動牌")));
+			return;
+		}
+		socket.emit("additionalPlay", {
+			"player": player,
+			"idx": $(selection).attr("data-idx")
+		});
+		doDrop();
+
+		additionalPlayNum--;
+		if (additionalPlayNum == 0) {
+			$("#additionalPlay").fadeOut(function() {
+				action = card.action;
+				$.each(action, function(i, v) {
+					if (v.draw) {
+						$("#draw").show();
+						adNum = v.draw;
+					}
+					if (v.additionalPlay) {
+						$("#additionalPlay").show();
+						additionalPlayType = v.type;
+						additionalPlayNum = v.additionalPlay;
+					}
+					if (v.drop) {
+						$("#drop").show();
+						canDropNum = v.drop;
+					}
+					if (v.take) {
+						$("#take").show();
+						canTakeNum = v.take;
+					}
+				});
+			});
+		}
+	});
 });
 
 var reset = function() {
 	$("#cardRow").empty();
 	$(".pkRow").empty();
+	$(".apRow").empty();
 	cardNum = 5;
 	myAttackCard = [];
 	myShieldCard = [];
@@ -221,6 +272,8 @@ var socketConnect = function() {
 						}
 						if (v.additionalPlay) {
 							$("#additionalPlay").show();
+							additionalPlayType = v.type;
+							additionalPlayNum = v.additionalPlay;
 						}
 						if (v.drop) {
 							$("#drop").show();
@@ -253,7 +306,7 @@ var socketConnect = function() {
 
 					$(".pkTitle").css({
 						"top": (cardTopNormal - 100 < 1) ? 1 : cardTopNormal - 100 + "px"
-					})
+					});
 					setTimeout('$(".pkView .card").removeClass("hover");', 1000);
 				});
 				break;
@@ -264,6 +317,7 @@ var socketConnect = function() {
 				doNewRound();
 				break;
 			case "reset":
+				render();
 				reset();
 				break;
 			case "drop":
@@ -301,6 +355,23 @@ var socketConnect = function() {
 			case "get":
 				var idx = data.message.split("::")[1];
 				doGain(idx);
+				break;
+			case "additionalPlay":
+				var idx = data.message.split("::")[1];
+				$(".apTitle").css({
+					"top": (cardTopNormal - 100 < 1) ? 1 : cardTopNormal - 100 + "px"
+				})
+				$(".additionalPlayView").fadeIn();
+				$(".apRow").empty();
+				$(".apRow").append(getCardView(idx));
+				$(".apRow .card").css({
+					"left": ((ww / 2) - 80) + "px",
+					"top": "-200px"
+				}).animate({
+					"top": ((wh / 2) - 120) + "px"
+				}, 200, function() {
+					setTimeout("$('.apRow .card').removeClass('hover')");
+				});
 				break;
 		}
 	});
@@ -469,6 +540,8 @@ var doNewRound = function() {
 			});
 		})
 	});
+	additionalPlayType = undefined;
+	additionalPlayNum = undefined;
 }
 
 var doDrop = function() {
@@ -504,6 +577,7 @@ var doDrop = function() {
 			$card.remove();
 			cardNum--;
 			doShowCard();
+			selection = undefined;
 		});
 	}
 }

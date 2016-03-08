@@ -113,6 +113,18 @@ var initSocket = function(server) {
 			}
 		});
 
+		socket.on("additionalPlay", function(data) {
+			console.log(data.player + " additionally play " + data.idx);
+			switch (data.player) {
+				case "1p":
+					util.socketEmitByIndex(1, "system", "additionalPlay::" + data.idx);
+					break;
+				case "2p":
+					util.socketEmitByIndex(0, "system", "additionalPlay::" + data.idx);
+					break;
+			}
+		});
+
 		util.sockets.push(socket);
 		util.refreshSockets();
 
