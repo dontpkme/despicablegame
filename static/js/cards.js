@@ -125,7 +125,7 @@ var cards = [{
 }, {
 	type: "shield",
 	name: "石中劍",
-	desc: "拔出石中劍的人，大家都要聽他的。防禦攻擊成功後，可奪對方一張牌。",
+	desc: "拔出石中劍的人就能成為國王，大家都要聽從他。防禦攻擊成功後，可奪對方一張牌。",
 	image: "excalibur.png",
 	possibility: 70,
 	action: [{
@@ -194,14 +194,11 @@ var cards = [{
 	}]
 }, {
 	type: "shield",
-	name: "變大裝置",
-	desc: "赫伯的邪惡機器，讓凱文變得無比巨大。50%防禦攻擊，若沒被攻擊到可再使用一張攻擊牌。",
+	name: "巨大化裝置",
+	desc: "赫伯的邪惡機器，讓凱文變得無比巨大。防禦攻擊，並可阻擋任何移動。",
 	image: "bigmachine.png",
-	possibility: 70,
-	action: [{
-		additionalPlay: 1,
-		type: "attack"
-	}]
+	possibility: 10,
+	action: []
 }, {
 	type: "move",
 	name: "單眼的",
@@ -233,7 +230,7 @@ var cards = [{
 }, {
 	type: "move",
 	name: "中分的",
-	desc: "中分才是王道。若移動成功，40%機率可再抽一張牌。",
+	desc: "中分才是帥氣的王道。60%機率可再抽一張牌。",
 	image: "sleek.png",
 	possibility: 90,
 	action: [{
@@ -242,7 +239,7 @@ var cards = [{
 }, {
 	type: "move",
 	name: "軟髮的",
-	desc: "看我柔順的頭髮。若移動成功，40%機率可再抽一張牌。",
+	desc: "看我柔順的頭髮。40%機率可再抽一張牌。",
 	image: "soft.png",
 	possibility: 90,
 	action: [{
@@ -250,8 +247,17 @@ var cards = [{
 	}]
 }, {
 	type: "move",
+	name: "刺髮的",
+	desc: "刺刺的髮型看起來有點壞壞的 。70%機率可再抽一張牌。",
+	image: "hard.png",
+	possibility: 90,
+	action: [{
+		draw: 1
+	}]
+}, {
+	type: "move",
 	name: "光頭的",
-	desc: "不是禿頭，是光頭。若移動成功，40%機率可再抽一張牌。",
+	desc: "不是禿頭，是光頭。40%機率可再抽一張牌。",
 	image: "bold.png",
 	possibility: 90,
 	action: [{
@@ -260,7 +266,7 @@ var cards = [{
 }, {
 	type: "move",
 	name: "高的",
-	desc: "資料顯示最高的小小兵是120公分的Tim。若移動成功，50%機率可再抽一張牌。",
+	desc: "資料顯示最高的小小兵是120公分的Tim。50%機率可再抽一張牌。",
 	image: "tall.png",
 	possibility: 80,
 	action: [{
@@ -276,7 +282,7 @@ var cards = [{
 }, {
 	type: "move",
 	name: "往上看的",
-	desc: "因為身高太矮，視線常常往上看。若移動成功，50%機率可再抽一張牌。",
+	desc: "因為身高太矮，視線常常往上看。50%機率可再抽一張牌。",
 	image: "lookup.png",
 	possibility: 80,
 	action: [{
@@ -285,7 +291,7 @@ var cards = [{
 }, {
 	type: "move",
 	name: "往下看的",
-	desc: "因為身高太矮，視線很少有機會往下看。若移動成功，50%機率可棄對方一張牌。",
+	desc: "因為身高太矮，視線很少有機會往下看。50%機率可棄對方一張牌。",
 	image: "lookdown.png",
 	possibility: 80,
 	action: [{
@@ -294,7 +300,7 @@ var cards = [{
 }, {
 	type: "move",
 	name: "石器時代的",
-	desc: "石器時代就有小小兵的足跡。這回合附帶防禦攻擊效果。",
+	desc: "石器時代就有小小兵的足跡，他們的故事被記錄在某個壁畫上。這回合附帶防禦攻擊效果。",
 	image: "stoneage.png",
 	possibility: 40,
 	action: []
@@ -327,7 +333,7 @@ var cards = [{
 }, {
 	type: "move",
 	name: "拿武器的",
-	desc: "小小兵拿武器的時候是很危險的。若移動成功，可多用一張攻擊牌。",
+	desc: "小小兵拿武器的時候是很危險的。可多用一張攻擊牌。",
 	image: "armed.png",
 	possibility: 50,
 	action: [{
@@ -337,7 +343,7 @@ var cards = [{
 }, {
 	type: "move",
 	name: "拿花的",
-	desc: "花是很棒的生日禮物。若移動成功，可多用一張移動牌。",
+	desc: "花是很棒的生日禮物。可多用一張移動牌。",
 	image: "rose.png",
 	possibility: 50,
 	action: [{
@@ -347,7 +353,7 @@ var cards = [{
 }, {
 	type: "move",
 	name: "拿禮物的",
-	desc: "最棒的生日禮物送給最棒的嚕。若移動成功，可再抽兩張牌。",
+	desc: "最棒的生日禮物送給最棒的嚕。可再抽兩張牌。",
 	image: "gift.png",
 	possibility: 50,
 	action: [{
@@ -356,7 +362,7 @@ var cards = [{
 }, {
 	type: "move",
 	name: "海盜的",
-	desc: "看過黃色的海盜嗎？若移動成功，可奪對方一張牌。",
+	desc: "Yarr！！！看過黃色的海盜嗎？可奪對方一張牌。",
 	image: "pirate.png",
 	possibility: 40,
 	action: [{
@@ -365,7 +371,7 @@ var cards = [{
 }, {
 	type: "move",
 	name: "拿破崙的",
-	desc: "歷史上拿破崙因為小小兵的幫助慘遭滑鐵盧。若移動成功，可奪對方一張牌。",
+	desc: "歷史上拿破崙因為小小兵的幫助慘遭滑鐵盧。可奪對方一張牌。",
 	image: "napeleon.png",
 	possibility: 40,
 	action: [{
@@ -374,7 +380,7 @@ var cards = [{
 }, {
 	type: "move",
 	name: "特務的",
-	desc: "身手不凡的特務。若移動成功，可棄對手一張牌。",
+	desc: "身手不凡的特務。可棄對手一張牌。",
 	image: "agent.png",
 	possibility: 40,
 	action: [{
@@ -383,7 +389,7 @@ var cards = [{
 }, {
 	type: "move",
 	name: "嚕嚕咪帽的",
-	desc: "只有這裡有戴著限量版嚕嚕咪帽子的小小兵。若移動成功，可再抽兩張牌。",
+	desc: "只有這裡有戴著限量版嚕嚕咪帽子的小小兵。可再抽兩張牌。",
 	image: "",
 	possibility: 30,
 	action: [{
@@ -392,7 +398,7 @@ var cards = [{
 }, {
 	type: "move",
 	name: "戴帽子的",
-	desc: "在不同場合戴不同的帽子。若移動成功，可再抽一張牌。",
+	desc: "在不同場合戴不同的帽子，頭巾也可以算帽子吧？可再抽一張牌。",
 	image: "hat.png",
 	possibility: 40,
 	action: [{
@@ -401,7 +407,7 @@ var cards = [{
 }, {
 	type: "move",
 	name: "史都華",
-	desc: "彈著烏克麗麗的規則破壞者。若移動成功，可棄對方兩張牌。",
+	desc: "彈著烏克麗麗的規則破壞者。可棄對方兩張牌。",
 	image: "stuart.png",
 	possibility: 30,
 	action: [{
@@ -410,8 +416,8 @@ var cards = [{
 }, {
 	type: "move",
 	name: "凱文",
-	desc: "有責任感的凱文。若移動成功，可任意多移動一步不需消耗移動牌。",
-	image: "",
+	desc: "有責任感的凱文，為了同伴們挺身出發去冒險。可任意多移動一步不需消耗移動牌。",
+	image: "kevin.png",
 	possibility: 30,
 	action: []
 }, {
@@ -420,5 +426,12 @@ var cards = [{
 	desc: "小小兵也能飛，飛行時要小心經過的鳥。只有在落後時才可使用，若未被攻擊，可任意移動兩步。",
 	image: "fly.png",
 	possibility: 40,
+	action: []
+}, {
+	type: "move",
+	name: "噴射機",
+	desc: "飛機是所有交通工具中最安全快速的一種。此移動能無視任何攻擊。",
+	image: "aircraft.png",
+	possibility: 20,
 	action: []
 }];
