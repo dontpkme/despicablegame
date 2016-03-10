@@ -28,13 +28,11 @@ exports.index = function(request, response) {
 	_returnFile("/index.html", response);
 };
 
+exports.map = function(request, response) {
+	_returnFile("/map.html", response);
+};
+
 exports.returnFile = function(request, response) {
 	var path = util.getPathname(request);
 	_returnFile(path, response);
-};
-
-exports.gameStart = function(request, response) {
-	util.refreshSockets();
-	util.socketsBroadcast("system", "gamestart");
-	util.initTextResponse(response, "OK");
 };

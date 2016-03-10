@@ -10,6 +10,7 @@ var handler = {
 };
 
 handler["GET"]["/"] = requestHandlers.index;
+handler["GET"]["/map"] = requestHandlers.map;
 handler["GET"].defaultHandler = requestHandlers.returnFile;
 
 handler["POST"].defaultHandler = requestHandlers.returnFile;
