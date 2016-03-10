@@ -390,7 +390,7 @@ var cards = [{
 	type: "move",
 	name: "嚕嚕咪帽的",
 	desc: "只有這裡有戴著限量版嚕嚕咪帽子的小小兵。可再抽兩張牌。",
-	image: "",
+	image: "cap.png",
 	possibility: 30,
 	action: [{
 		draw: 2
