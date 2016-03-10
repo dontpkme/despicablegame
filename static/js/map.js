@@ -5,12 +5,26 @@ $(document).ready(function() {
 var render = function() {
 	var ww = $(window).width();
 	var wh = $(window).height();
+	var $token;
 
 	if(ww > wh) {
 		$(".mask").show();
 	} else {
 		$(".mask").hide();
 	}
+
+	$(".token").click(function(e){
+		$token = $(this);
+		$(this).addClass("selected");
+		$(".mask").removeAttr("data-hide");
+	});
+
+	$(".map").click(function(e){
+		$token.removeClass("selected").animate({
+			"top":(e.pageY-15)+"px",
+			"left":(e.pageX-15)+"px",
+		});
+	});
 }
 
 $(window).resize(function() {

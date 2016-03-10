@@ -26,5 +26,43 @@ html, body {
 	height: 100%;
 	font-size: 3em;
 	text-align: center;
-	padding-top:20%;
+	padding-top:15%;
+}
+
+.qr {
+	background-image:url(/image/qr.jpg);
+	background-size:cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	width:100px;
+	height:100px;
+	margin:0 auto;
+}
+
+.token {
+	width: 30px;
+	height:30px;
+	position:absolute;
+	background-image:url(/image/gru.png);
+	background-size:cover;
+	top:0;
+	left:0;
+	border-radius: 50%;
+	box-shadow: 5px 5px 5px rgba(0,0,0,0.7)
+}
+
+.token.selected {
+	opacity: 0.5;
+}
+
+.token.yellow {
+	background-color:yellow;
+}
+
+.token.green {
+	background-color:green;
+}
+
+.mask[init-data] .token {
+	display: none;
 }
