@@ -384,10 +384,6 @@ var render = function() {
 	cardSpacing = (cardDeckW - 280) / cardNum;
 	cardTopNormal = (wh / 2) - 80;
 	cardTopSelected = cardTopNormal - 70;
-	$("body,html").css({
-		"width": ww + "px",
-		"height": wh + "px",
-	});
 
 	var arh = wh * 0.08;
 	$(".actionRow").css({
@@ -395,6 +391,12 @@ var render = function() {
 		"line-height": arh + "px",
 		"border-radius": (arh / 2) + "px"
 	});
+
+	if(ww < wh) {
+		$(".mask").show();
+	} else {
+		$(".mask").hide();
+	}
 }
 
 $(window).resize(function() {
