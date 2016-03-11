@@ -8,61 +8,56 @@ html, body {
 	height: 100%;
 	font-family: 'Noto Sans TC', sans-serif;
 }
-
 .map {
 	background-image: url(/image/map.png);
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
-	width:100%;
-	height:100%;
+	width: 100%;
+	height: 100%;
 }
-
 .mask {
-	background-color: rgba(0,0,0,0.6);
+	background-color: rgba(0, 0, 0, 0.6);
 	color: #ffffff;
 	position: fixed;
 	width: 100%;
 	height: 100%;
 	font-size: 3em;
 	text-align: center;
-	padding-top:15%;
+	padding-top: 15%;
 }
-
 .qr {
-	background-image:url(/image/qr.jpg);
-	background-size:cover;
+	background-image: url(/image/qr.jpg);
+	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
-	width:100px;
-	height:100px;
-	margin:0 auto;
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
 }
-
 .token {
 	width: 30px;
-	height:30px;
-	position:absolute;
-	background-image:url(/image/gru.png);
-	background-size:cover;
-	top:0;
-	left:0;
+	height: 30px;
+	position: absolute;
+	background-image: url(/image/gru.png);
+	background-size: cover;
+	top: 0;
+	left: 0;
 	border-radius: 50%;
-	box-shadow: 5px 5px 5px rgba(0,0,0,0.7)
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7)
 }
-
 .token.selected {
 	opacity: 0.5;
 }
-
 .token.yellow {
-	background-color:yellow;
+	background-color: yellow;
 }
-
 .token.green {
-	background-color:green;
+	background-color: green;
 }
-
+.token.hide {
+	display: none;
+}
 .mask[init-data] .token {
 	display: none;
 }

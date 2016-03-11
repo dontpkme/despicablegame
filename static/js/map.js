@@ -7,22 +7,23 @@ var render = function() {
 	var wh = $(window).height();
 	var $token;
 
-	if(ww > wh) {
+	if (ww > wh) {
 		$(".mask").show();
+		$(".token").removeClass("hide");
 	} else {
 		$(".mask").hide();
 	}
 
-	$(".token").click(function(e){
+	$(".token").click(function(e) {
 		$token = $(this);
 		$(this).addClass("selected");
 		$(".mask").removeAttr("data-hide");
 	});
 
-	$(".map").click(function(e){
+	$(".map").click(function(e) {
 		$token.removeClass("selected").animate({
-			"top":(e.pageY-15)+"px",
-			"left":(e.pageX-15)+"px",
+			"top": (e.pageY - 15) + "px",
+			"left": (e.pageX - 15) + "px",
 		});
 	});
 }
