@@ -17,7 +17,6 @@ var render = function() {
 	$(".token").click(function(e) {
 		$token = $(this);
 		$(this).addClass("selected");
-		$(".mask").removeAttr("data-hide");
 	});
 
 	$(".map").click(function(e) {

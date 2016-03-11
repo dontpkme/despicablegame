@@ -58,6 +58,3 @@ html, body {
 .token.hide {
 	display: none;
 }
-.mask[init-data] .token {
-	display: none;
-}
