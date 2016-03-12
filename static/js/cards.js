@@ -176,7 +176,7 @@ var cards = [{
 }, {
 	type: "shield",
 	name: "噴射背包",
-	desc: "飛行是更快的移動方式。50%閃避攻擊，若沒被攻擊到可多用一張移動牌。",
+	desc: "飛行是更快的移動方式。50%機率閃避攻擊，若沒被攻擊到可多用一張移動牌。",
 	image: "jetpack.png",
 	possibility: 50,
 	action: [{
@@ -186,7 +186,7 @@ var cards = [{
 }, {
 	type: "shield",
 	name: "烏賊發射槍",
-	desc: "維克特的武器之一，發射出噁心的烏賊。50%防禦攻擊，若沒被攻擊到可奪對手一張牌。",
+	desc: "維克特的武器之一，發射出噁心的烏賊。50%機率防禦攻擊，若沒被攻擊到可奪對手一張牌。",
 	image: "squidlauncher.png",
 	possibility: 50,
 	action: [{
@@ -275,7 +275,7 @@ var cards = [{
 }, {
 	type: "move",
 	name: "矮胖的",
-	desc: "我不是胖，我是衣服寬鬆了點。這回合附帶50%防禦攻擊效果。",
+	desc: "我不是胖，我是衣服寬鬆了點。這回合附帶50%機率防禦攻擊效果。",
 	image: "fat.png",
 	possibility: 80,
 	action: []

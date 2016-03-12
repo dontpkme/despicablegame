@@ -86,8 +86,9 @@ $(document).ready(function() {
 			$(selection).removeClass("hover");
 			setTimeout("doDrop();", 1000);
 
-			if (dropNum == 0)
-				$("#dropOk").text("完成棄牌");
+			if (dropNum == 0) {
+				$("#dropOk").text("完成棄牌").addClass("done");
+			}
 		}
 	});
 
@@ -115,8 +116,9 @@ $(document).ready(function() {
 			$(selection).removeClass("hover");
 			setTimeout("doDrop();doTake()", 1000);
 
-			if (takeNum == 0)
-				$("#takeOk").text("完成奪牌");
+			if (takeNum == 0) {
+				$("#takeOk").text("完成奪牌").addClass("done");
+			}
 		}
 	});
 
@@ -322,34 +324,44 @@ var socketConnect = function() {
 				break;
 			case "drop":
 				dropNum = data.message.split("::")[1];
-				status = "droping";
-				$(".step2").hide();
-				$(".step3").fadeIn();
-				$("#dropOk").show().text("確定棄牌");
-				$("#cardRow .card").addClass("hover");
-				if (selection != undefined) {
-					$(".card.selectedCard").removeClass("selectedCard").animate({
-						"top": cardTopNormal + "px"
-					}, 100, function() {
-						doShowCard(null, false);
-					});
-					selection = undefined;
+				if (dropNum > cardNum) {
+					dropNum = cardNum;
+				}
+				if(cardNum > 0) {
+					status = "droping";
+					$(".step2").hide();
+					$(".step3").fadeIn();
+					$("#dropOk").show().text("確定棄牌").removeClass("done");
+					$("#cardRow .card").addClass("hover");
+					if (selection != undefined) {
+						$(".card.selectedCard").removeClass("selectedCard").animate({
+							"top": cardTopNormal + "px"
+						}, 100, function() {
+							doShowCard(null, false);
+						});
+						selection = undefined;
+					}
 				}
 				break;
 			case "take":
 				takeNum = data.message.split("::")[1];
-				status = "taking";
-				$(".step2").hide();
-				$(".step3").fadeIn();
-				$("#takeOk").show().text("確定奪牌");
-				$("#cardRow .card").addClass("hover");
-				if (selection != undefined) {
-					$(".card.selectedCard").removeClass("selectedCard").animate({
-						"top": cardTopNormal + "px"
-					}, 100, function() {
-						doShowCard(null, false);
-					});
-					selection = undefined;
+				if (takeNum > cardNum) {
+					takeNum = cardNum;
+				}
+				if(cardNum > 0) {
+					status = "taking";
+					$(".step2").hide();
+					$(".step3").fadeIn();
+					$("#takeOk").show().text("確定奪牌").removeClass("done");
+					$("#cardRow .card").addClass("hover");
+					if (selection != undefined) {
+						$(".card.selectedCard").removeClass("selectedCard").animate({
+							"top": cardTopNormal + "px"
+						}, 100, function() {
+							doShowCard(null, false);
+						});
+						selection = undefined;
+					}
 				}
 				break;
 			case "get":
