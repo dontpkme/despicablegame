@@ -9,7 +9,7 @@ html, body {
 	font-family: 'Noto Sans TC', sans-serif;
 }
 .map {
-	background-image: url(/image/map.png);
+	background-image: url(/image/map.jpg);
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -44,7 +44,7 @@ html, body {
 	top: 0;
 	left: 0;
 	border-radius: 50%;
-	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7)
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
 }
 .token.selected {
 	opacity: 0.5;
