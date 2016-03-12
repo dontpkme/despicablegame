@@ -22,6 +22,7 @@ var adNum = 0;
 var additionalPlayType;
 var additionalPlayNum;
 var roundEnd = false;
+var joined = false;
 
 $(document).ready(function() {
 	$(".step2").hide();
@@ -220,7 +221,10 @@ var reset = function() {
 var socketConnect = function() {
 	socket = io.connect();
 	socket.on("connect", function() {
-		socket.emit("join", {});
+		if(ww > wh && !joined) {
+			socket.emit("join", {});
+			joined = true;
+		}
 	});
 	socket.on("disconnect", function() {
 		// alert("disconnect");
@@ -408,6 +412,10 @@ var render = function() {
 		$(".mask").show();
 	} else {
 		$(".mask").hide();
+		if(!joined && socket!=undefined) {
+			socket.emit("join", {});
+			joined = true;
+		}
 	}
 }
 
