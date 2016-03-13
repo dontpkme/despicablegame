@@ -4,7 +4,11 @@ $(document).ready(function() {
 
 	$(".token").click(function(e) {
 		$token = $(e.target);
-		$(e.target).addClass("selected");
+		if($token.hasClass("selected")) {
+			$token.removeClass("selected");
+		} else {
+			$token.addClass("selected");
+		}
 	});
 
 	$(".map").click(function(e) {
