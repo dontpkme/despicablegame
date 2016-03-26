@@ -362,7 +362,7 @@ var cards = [{
 }, {
 	type: "move",
 	name: "海盜的",
-	desc: "Yarr！！！看過黃色的海盜嗎？可奪對方一張牌。",
+	desc: "Aye aye sir！我是快樂的黃色海盜。可奪對方一張牌。",
 	image: "pirate.png",
 	possibility: 100,
 	action: [{
