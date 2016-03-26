@@ -1,11 +1,47 @@
+const CARD_NUM = 55;
+
 var http = require("http");
 var io = require('socket.io'); // 加入 Socket.IO
 var util = require('./util.js');
 
 var initSocket = function(server) {
+	var cards = [];
+	var usedCards = [];
 	var serv_io = io.listen(server);
 	var play1p, play2p, end1p = false,
 		end2p = false;
+
+	var initCards = function() {
+		cards = [];
+		usedCards = [];
+		for(var i = 0; i < CARD_NUM; i++) {
+			cards.push(i);
+		}
+	}
+	var shuffle = function() {
+		for(var i = 0; i < cards.length; i++) {
+			var nowN = i;
+			var changeN = Math.floor(Math.random() * cards.length);
+			var nowV = cards[nowN];
+			var changeV = cards[changeN];
+			if(nowN != changeN) {
+				var tempV = nowV;
+				cards[nowN] = changeV;
+				cards[changeN] = tempV;
+			}
+		}
+	}
+	var checkCardLeft = function() {
+		console.log(cards.length+":"+usedCards.length);
+		if(cards.length == 0) {
+			cards = [];
+			for(var i = 0; i < usedCards.length; i++) {
+				cards.push(usedCards[i]);
+			}
+			shuffle();
+			usedCards = [];
+		}
+	}
 
 	serv_io.sockets.on('connection', function(socket) {
 		console.log("create a web socket connection.");
@@ -19,6 +55,8 @@ var initSocket = function(server) {
 				util.socketEmitByIndex(0, "system", "player::1p");
 				util.socketEmitByIndex(1, "system", "player::2p");
 				util.socketsBroadcast("system", "gamestart");
+				initCards();
+				shuffle();
 			}
 		});
 
@@ -68,6 +106,22 @@ var initSocket = function(server) {
 			}
 		});
 
+		socket.on("deal", function(data) {
+			var dealedCard = cards.pop();
+			usedCards.push(dealedCard);
+			checkCardLeft();
+			console.log("deal:" + dealedCard);
+
+			switch (data.player) {
+				case "1p":
+					util.socketEmitByIndex(0, "system", "deal::" + dealedCard);
+					break;
+				case "2p":
+					util.socketEmitByIndex(1, "system", "deal::" + dealedCard);
+					break;
+			}
+		});
+
 		socket.on("reset", function(data) {
 			console.log("reset");
 			play1p = undefined;
@@ -75,10 +129,15 @@ var initSocket = function(server) {
 			end1p = false;
 			end2p = false;
 			util.socketsBroadcast("system", "reset");
+
+			initCards();
+			shuffle();
 		});
 
 		socket.on("drop", function(data) {
 			console.log(data.player + " wants to drop");
+			usedCards.push(data.num);
+			checkCardLeft();
 			switch (data.player) {
 				case "1p":
 					util.socketEmitByIndex(1, "system", "drop::" + data.num);
