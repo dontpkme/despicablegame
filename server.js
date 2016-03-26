@@ -19,6 +19,7 @@ var initSocket = function(server) {
 		}
 	}
 	var shuffle = function() {
+		console.log("do shuffle");
 		for(var i = 0; i < cards.length; i++) {
 			var nowN = i;
 			var changeN = Math.floor(Math.random() * cards.length);
@@ -34,6 +35,7 @@ var initSocket = function(server) {
 	var checkCardLeft = function() {
 		console.log(cards.length+":"+usedCards.length);
 		if(cards.length == 0) {
+			console.log("recycle used cards");
 			cards = [];
 			for(var i = 0; i < usedCards.length; i++) {
 				cards.push(usedCards[i]);
@@ -61,7 +63,10 @@ var initSocket = function(server) {
 		});
 
 		socket.on("play", function(data) {
+			usedCards.push(data.idx);
 			console.log("play:" + data.idx);
+			checkCardLeft();
+
 			switch (data.player) {
 				case "1p":
 					play1p = data.idx;
@@ -108,9 +113,8 @@ var initSocket = function(server) {
 
 		socket.on("deal", function(data) {
 			var dealedCard = cards.pop();
-			usedCards.push(dealedCard);
-			checkCardLeft();
 			console.log("deal:" + dealedCard);
+			checkCardLeft();
 
 			switch (data.player) {
 				case "1p":
@@ -136,8 +140,7 @@ var initSocket = function(server) {
 
 		socket.on("drop", function(data) {
 			console.log(data.player + " wants to drop");
-			usedCards.push(data.num);
-			checkCardLeft();
+			
 			switch (data.player) {
 				case "1p":
 					util.socketEmitByIndex(1, "system", "drop::" + data.num);
@@ -146,6 +149,12 @@ var initSocket = function(server) {
 					util.socketEmitByIndex(0, "system", "drop::" + data.num);
 					break;
 			}
+		});
+
+		socket.on("dropped", function(data) {
+			usedCards.push(data.idx);
+			console.log("dropped:" + data.idx);
+			checkCardLeft();
 		});
 
 		socket.on("take", function(data) {
@@ -173,7 +182,10 @@ var initSocket = function(server) {
 		});
 
 		socket.on("additionalPlay", function(data) {
+			usedCards.push(data.idx);
 			console.log(data.player + " additionally play " + data.idx);
+			checkCardLeft();
+
 			switch (data.player) {
 				case "1p":
 					util.socketEmitByIndex(1, "system", "additionalPlay::" + data.idx);

@@ -84,6 +84,9 @@ $(document).ready(function() {
 				return;
 			}
 			dropNum--;
+			socket.emit("dropped", {
+				"idx": $(selection).attr("data-idx")
+			});
 			$(selection).removeClass("hover");
 			setTimeout("doDrop();", 1000);
 
@@ -441,58 +444,6 @@ var doDeal = function() {
 	socket.emit("deal", {
 		"player": player
 	});
-	/*
-	if (n == undefined)
-		n = 1;
-	cardNum += n;
-
-	for (var i = 0; i < n; i++) {
-		if (idx == undefined)
-			idx = Math.floor(Math.random() * cards.length);
-		var card = cards[idx];
-		switch (card.type) {
-			case "attack":
-				myAttackCard.push(card);
-				break;
-			case "shield":
-				myShieldCard.push(card);
-				break;
-			case "move":
-				myMoveCard.push(card);
-				break;
-		}
-		$("#cardRow").append(getCardView(idx, true));
-	}
-
-	$(".card").unbind("click").click(function(e) {
-		var $target;
-		if ($(e.target).hasClass("card"))
-			$target = $(e.target);
-		else
-			$target = $(e.target).parents(".card");
-
-		$(".card.selectedCard").animate({
-			"top": cardTopNormal + "px"
-		}, 100)
-		if ($target.hasClass("selectedCard")) {
-			$(".card").removeClass("selectedCard");
-			selection = undefined;
-		} else {
-			$(".card").removeClass("selectedCard");
-			$target.addClass("selectedCard").animate({
-				"top": cardTopSelected + "px"
-			}, 300);
-			selection = $target;
-		}
-		doShowCard();
-	});
-
-	$(".dealing").animate({
-		"top": cardTopNormal + "px"
-	}, 600, function() {
-		$(".dealing").removeClass("dealing");
-	});
-	*/
 }
 
 var doSort = function() {}
