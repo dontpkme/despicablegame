@@ -224,7 +224,7 @@ var reset = function() {
 var socketConnect = function() {
 	socket = io.connect();
 	socket.on("connect", function() {
-		if(ww > wh && !joined) {
+		if (ww > wh && !joined) {
 			socket.emit("join", {});
 			joined = true;
 		}
@@ -338,7 +338,7 @@ var socketConnect = function() {
 				if (dropNum > cardNum) {
 					dropNum = cardNum;
 				}
-				if(cardNum > 0) {
+				if (cardNum > 0) {
 					status = "droping";
 					$(".step2").hide();
 					$(".step3").fadeIn();
@@ -359,7 +359,7 @@ var socketConnect = function() {
 				if (takeNum > cardNum) {
 					takeNum = cardNum;
 				}
-				if(cardNum > 0) {
+				if (cardNum > 0) {
 					status = "taking";
 					$(".step2").hide();
 					$(".step3").fadeIn();
@@ -415,11 +415,11 @@ var render = function() {
 		"border-radius": (arh / 2) + "px"
 	});
 
-	if(ww < wh) {
+	if (ww < wh) {
 		$(".mask").show();
 	} else {
 		$(".mask").hide();
-		if(!joined && socket!=undefined) {
+		if (!joined && socket != undefined) {
 			socket.emit("join", {});
 			joined = true;
 		}

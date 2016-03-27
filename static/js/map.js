@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 	$(".token").click(function(e) {
 		$token = $(e.target);
-		if($token.hasClass("selected")) {
+		if ($token.hasClass("selected")) {
 			$token.removeClass("selected");
 		} else {
 			$token.addClass("selected");
@@ -16,7 +16,7 @@ $(document).ready(function() {
 			$token.removeClass("selected").animate({
 				"top": (e.pageY - 15) + "px",
 				"left": (e.pageX - 15) + "px",
-			}, function(){
+			}, function() {
 				$token = undefined;
 			});
 		}
@@ -30,14 +30,14 @@ var render = function() {
 	if (ww > wh) {
 		$(".mask").show();
 		$(".token").removeClass("hide").css({
-			"width": (wh*0.05)+"px",
-			"height": (wh*0.05)+"px",
+			"width": (wh * 0.05) + "px",
+			"height": (wh * 0.05) + "px",
 		});
 	} else {
 		$(".mask").hide();
 		$(".token").css({
-			"width": (ww*0.055)+"px",
-			"height": (ww*0.055)+"px",
+			"width": (ww * 0.055) + "px",
+			"height": (ww * 0.055) + "px",
 		});
 	}
 }

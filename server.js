@@ -14,18 +14,18 @@ var initSocket = function(server) {
 	var initCards = function() {
 		cards = [];
 		usedCards = [];
-		for(var i = 0; i < CARD_NUM; i++) {
+		for (var i = 0; i < CARD_NUM; i++) {
 			cards.push(i);
 		}
 	}
 	var shuffle = function() {
 		console.log("do shuffle");
-		for(var i = 0; i < cards.length; i++) {
+		for (var i = 0; i < cards.length; i++) {
 			var nowN = i;
 			var changeN = Math.floor(Math.random() * cards.length);
 			var nowV = cards[nowN];
 			var changeV = cards[changeN];
-			if(nowN != changeN) {
+			if (nowN != changeN) {
 				var tempV = nowV;
 				cards[nowN] = changeV;
 				cards[changeN] = tempV;
@@ -33,11 +33,11 @@ var initSocket = function(server) {
 		}
 	}
 	var checkCardLeft = function() {
-		console.log(cards.length+":"+usedCards.length);
-		if(cards.length == 0) {
+		console.log(cards.length + ":" + usedCards.length);
+		if (cards.length == 0) {
 			console.log("recycle used cards");
 			cards = [];
-			for(var i = 0; i < usedCards.length; i++) {
+			for (var i = 0; i < usedCards.length; i++) {
 				cards.push(usedCards[i]);
 			}
 			shuffle();
@@ -140,7 +140,7 @@ var initSocket = function(server) {
 
 		socket.on("drop", function(data) {
 			console.log(data.player + " wants to drop");
-			
+
 			switch (data.player) {
 				case "1p":
 					util.socketEmitByIndex(1, "system", "drop::" + data.num);
